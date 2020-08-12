@@ -1,5 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd'
+import { GithubOutlined } from '@ant-design/icons'
 
 export const PageLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -7,7 +8,10 @@ export const PageLayout: React.FC<{ children: React.ReactNode }> = ({
   const { Header, Footer, Content } = Layout
   return (
     <Layout>
-      <Header>Header</Header>
+      <Header>
+        <GithubOutlined />
+        Header
+      </Header>
       <Content>{children}</Content>
       <Footer>Footer</Footer>
     </Layout>

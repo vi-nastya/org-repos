@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RepoData } from '../../ts/api-types'
-import { Table, Space, Row, Col } from 'antd'
+import { Table, Space, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
 
 const columns = [
@@ -47,11 +47,39 @@ const columns = [
 ]
 
 export const ReposList: React.FC<{ repos: RepoData[] }> = ({ repos }) => {
+  const [loadings, setLoadings] = useState<boolean[]>([])
+
+  const enterLoading = (index: number) => {
+    const newLoadings = [...loadings]
+    newLoadings[index] = true
+
+    setLoadings(newLoadings)
+
+    setTimeout(() => {
+      const newLoadings = [...loadings]
+      newLoadings[index] = false
+
+      setLoadings(newLoadings)
+    }, 2000)
+  }
   return (
     <>
       <Row>
         <Col span={20} offset={2}>
           <Table columns={columns} dataSource={repos} pagination={false} />
+        </Col>
+      </Row>
+      <Row justify="center">
+        <Col span={6}>
+          <Button
+            type="primary"
+            loading={loadings[0]}
+            size="large"
+            block
+            onClick={() => enterLoading(0)}
+          >
+            Load more
+          </Button>
         </Col>
       </Row>
     </>

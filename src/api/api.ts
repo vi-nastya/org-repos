@@ -12,7 +12,7 @@ type: all, public, private, forks, sources, member, internal (default ALL)
 */
 export const fetchRepos = (organization: string) => {
   return axios
-    .get(`${API_URL}/orgs/${organization}/repos`, {
+    .get(`${API_URL}/orgs/${organization}/repos?per_page=10&page=0`, {
       headers: {
         Accept: 'application/vnd.github.v3+json',
       },

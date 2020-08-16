@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { RepoData } from '../../ts/api-types'
 import { Table, Space, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
+import { connect } from 'react-redux'
+import { StateType } from '../../store/reducers'
 
 const columns = [
   {
@@ -46,7 +48,14 @@ const columns = [
   },
 ]
 
-export const ReposList: React.FC<{ repos: RepoData[] }> = ({ repos }) => {
+const mapStateToProps = (state: StateType) => {
+  return { repos: state.data, isLoadingData: state.loading }
+}
+
+const ConnectedReposList: React.FC<{
+  repos: RepoData[]
+  isLoadingData: boolean
+}> = ({ repos }) => {
   const [loadings, setLoadings] = useState<boolean[]>([])
 
   const enterLoading = (index: number) => {
@@ -85,3 +94,7 @@ export const ReposList: React.FC<{ repos: RepoData[] }> = ({ repos }) => {
     </>
   )
 }
+
+const ReposList = connect(mapStateToProps)(ConnectedReposList)
+
+export default ReposList

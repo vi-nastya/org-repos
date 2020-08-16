@@ -3,13 +3,14 @@ import {
   LOAD_REPOS_ERROR,
   LOAD_REPOS_LOADING,
   LOAD_REPOS_SUCCESS,
-} from '../store/actions'
+} from '../store/reducers'
 import { fetchRepos } from '../api/api'
 
-function* fetchReposData() {
+// worker saga
+// @ts-ignore
+function* fetchReposData(action) {
   try {
-    // TODO: add param from input
-    const repos = yield fetchRepos('facebook')
+    const repos = yield fetchRepos(action.payload)
     yield put({ type: LOAD_REPOS_SUCCESS, data: repos })
   } catch (e) {
     yield put({ type: LOAD_REPOS_ERROR, error: e.message })

@@ -4,10 +4,13 @@ import 'antd/dist/antd.css'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import { configureStore } from './store/store'
+
+const store = configureStore()
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store} />
   </React.StrictMode>,
   document.getElementById('root')
 )

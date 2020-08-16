@@ -6,6 +6,11 @@ import { RepoSearch } from './ui/components/RepoSearch'
 import { RepoData } from './ts/api-types'
 import { ReposList } from './ui/components/ReposList'
 
+import rootReducer, { StateType } from './store/reducers'
+
+import { connect } from 'react-redux'
+import { loadRepos } from './store/actions'
+
 const App = () => {
   const [repos, setRepos] = useState<RepoData[]>([])
   useEffect(() => {
@@ -33,4 +38,13 @@ const App = () => {
   )
 }
 
-export default App
+const mapStateToProps = (state: StateType) => ({
+  data: state.data,
+  loading: state.loading,
+  error: state.error,
+})
+const mapDispatchToProps = {
+  loadRepos,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

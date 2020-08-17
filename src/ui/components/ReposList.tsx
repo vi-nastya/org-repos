@@ -50,7 +50,11 @@ const columns = [
 ]
 
 const mapStateToProps = (state: StateType) => {
-  return { repos: state.data, isLoadingData: state.loading }
+  return {
+    repos: state.data,
+    isLoadingData: state.loading,
+    hasLoadedAllRepos: state.loadedAll,
+  }
 }
 
 // @ts-ignore
@@ -61,8 +65,9 @@ const mapDispatchToProps = {
 const ConnectedReposList: React.FC<{
   repos: RepoData[]
   isLoadingData: boolean
+  hasLoadedAllRepos: boolean
   loadRepos: () => void
-}> = ({ repos, isLoadingData, loadRepos }) => {
+}> = ({ repos, isLoadingData, hasLoadedAllRepos, loadRepos }) => {
   return (
     <>
       <Row>
@@ -70,7 +75,7 @@ const ConnectedReposList: React.FC<{
           <Table columns={columns} dataSource={repos} pagination={false} />
         </Col>
       </Row>
-      {repos.length > 0 && (
+      {repos.length > 0 && !hasLoadedAllRepos && (
         <Row justify="center">
           <Col span={6}>
             <Button

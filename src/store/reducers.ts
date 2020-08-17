@@ -19,6 +19,7 @@ export const setOrganizationName = (orgName: string) => {
 export type StateType = {
   data: RepoData[]
   loading: boolean
+  loadedAll: boolean
   error: string
   orgName: string | null
 }
@@ -26,6 +27,7 @@ export type StateType = {
 const initialState: StateType = {
   data: [],
   loading: false,
+  loadedAll: false,
   error: '',
   orgName: null,
 }
@@ -45,6 +47,7 @@ const reduxSagaReducer = (state = initialState, action) => {
         ...state,
         data: [...state.data, ...action.data],
         loading: false,
+        ...(action.data.length === 0 ? { loadedAll: true } : {}),
       }
     }
     case LOAD_REPOS_ERROR: {

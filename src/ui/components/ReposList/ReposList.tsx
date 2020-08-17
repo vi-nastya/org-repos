@@ -74,7 +74,9 @@ const ConnectedReposList: React.FC<ReposListProps> = ({
   loadRepos,
 }) => (
   <>
-    <Table columns={columns} dataSource={repos} pagination={false} />
+    {repos.length > 0 && (
+      <Table columns={columns} dataSource={repos} pagination={false} />
+    )}
 
     {repos.length > 0 && !hasLoadedAllRepos && (
       <Row justify="center" className="loadMoreButton">

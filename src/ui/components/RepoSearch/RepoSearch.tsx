@@ -38,8 +38,8 @@ const RepoSearchConnected: React.FC<RepoSearchProps> = ({
   return (
     <div className="searchWrapper">
       <Search
-        placeholder="input search text"
-        enterButton="Search"
+        placeholder="Organization name"
+        enterButton="Find repositories"
         size="large"
         onSearch={(value) => {
           setOrganizationName(value)

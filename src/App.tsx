@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageLayout } from './ui/layout/Layout'
+import { PageLayout } from './ui/layouts/PageLayout/PageLayout'
 import RepoSearch from './ui/components/RepoSearch/RepoSearch'
 import ReposList from './ui/components/ReposList/ReposList'
 

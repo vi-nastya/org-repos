@@ -1,5 +1,5 @@
 import React from 'react'
-import { RepoData } from '../../../ts/api-types'
+import { RepoData } from '../../../ts/apiTypes'
 import { Table, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { REPOS_PER_PAGE } from '../constants'
-import { RepoDataApi } from '../ts/api-types'
+import { RepoDataApi } from '../ts/apiTypes'
 
 const API_URL = 'https://api.github.com'
 

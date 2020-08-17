@@ -1,4 +1,4 @@
-import { RepoData, RepoDataApi } from '../ts/api-types'
+import { RepoData, RepoDataApi } from '../ts/apiTypes'
 
 export const normalizeApiData = (data: RepoDataApi): RepoData => {
   return {

@@ -1,4 +1,4 @@
-import { RepoData } from '../ts/api-types'
+import { RepoData } from '../ts/apiTypes'
 
 export const LOAD_REPOS_LOADING = 'LOAD_REPOS_LOADING'
 export const LOAD_REPOS_SUCCESS = 'LOAD_REPOS_SUCCESS'

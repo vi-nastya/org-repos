@@ -1,5 +1,6 @@
 # Поиск репозиториев организации
 
+[Задеплоенная версия](https://vinastya-org-repos.netlify.app/)
 Поиск репозиториев компании по названию и просмотр статистики: количество звезд, форков, watchers.
 
 В проекте используется [github API](https://docs.github.com/en/rest/reference/repos#list-organization-repositories).

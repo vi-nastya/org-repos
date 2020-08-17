@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { RepoData } from '../../ts/api-types'
-import { Table, Space, Row, Col, Button } from 'antd'
+import { Table, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { StateType } from '../../store/reducers'
@@ -57,18 +57,23 @@ const mapStateToProps = (state: StateType) => {
   }
 }
 
-// @ts-ignore
 const mapDispatchToProps = {
   loadRepos,
 }
 
-const ConnectedReposList: React.FC<{
+type ReposListProps = {
   repos: RepoData[]
   isLoadingData: boolean
   hasLoadedAllRepos: boolean
   loadRepos: () => void
-}> = ({ repos, isLoadingData, hasLoadedAllRepos, loadRepos }) => {
-  console.log('repos', repos)
+}
+
+const ConnectedReposList: React.FC<ReposListProps> = ({
+  repos,
+  isLoadingData,
+  hasLoadedAllRepos,
+  loadRepos,
+}) => {
   return (
     <>
       <Row>

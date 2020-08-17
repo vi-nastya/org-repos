@@ -5,14 +5,20 @@ import { loadRepos, setOrganizationName } from '../../store/reducers'
 
 const { Search } = Input
 
-// @ts-ignore
 const mapDispatchToProps = {
   loadRepos,
   setOrganizationName,
 }
 
-// @ts-ignore
-const RepoSearchConnected = ({ loadRepos, setOrganizationName }) => {
+type RepoSearchProps = {
+  loadRepos: () => void
+  setOrganizationName: (orgName: string) => void
+}
+
+const RepoSearchConnected: React.FC<RepoSearchProps> = ({
+  loadRepos,
+  setOrganizationName,
+}) => {
   return (
     <Search
       placeholder="input search text"

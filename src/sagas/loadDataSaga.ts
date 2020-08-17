@@ -1,4 +1,4 @@
-import { put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { put, takeEvery } from 'redux-saga/effects'
 import {
   LOAD_REPOS_ERROR,
   LOAD_REPOS_LOADING,
@@ -15,8 +15,7 @@ const getNewPageNumber = (state: StateType) =>
 const getOrgName = (state: StateType) => state.orgName
 
 // worker saga
-// @ts-ignore
-function* fetchReposData(action) {
+function* fetchReposData() {
   try {
     const pageNumber = yield select(getNewPageNumber)
     const orgName = yield select(getOrgName)
@@ -29,10 +28,7 @@ function* fetchReposData(action) {
 }
 
 export function* loadDataSaga() {
-  // Allows concurrent fetches of repos
   yield takeEvery(LOAD_REPOS_LOADING, fetchReposData)
-  // Does not allow concurrent fetches of repos
-  // yield takeLatest(LOAD_REPOS_LOADING, fetchReposData);
 }
 
 export default loadDataSaga

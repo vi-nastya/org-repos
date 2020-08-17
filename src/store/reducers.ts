@@ -7,7 +7,32 @@ export const LOAD_REPOS_ERROR = 'REDUX_SAGA_LOAD_REPOS_ERROR'
 export const SET_ORGANIZATION_NAME = 'SET_ORGANIZATION_NAME'
 export const CLEAR_ORGANIZATION_NAME = 'CLEAR_ORGANIZATION_NAME'
 
-// @ts-ignore
+type LoadReposType = {
+  type: typeof LOAD_REPOS_LOADING
+}
+
+type LoadReposSuccessType = {
+  type: typeof LOAD_REPOS_SUCCESS
+  data: RepoData[]
+}
+
+type LoadReposErrorType = {
+  type: typeof LOAD_REPOS_ERROR
+  error: string
+}
+
+type SetOrganizationNameType = {
+  type: typeof SET_ORGANIZATION_NAME
+  payload: string
+}
+
+type LoadReposActionType =
+  | LoadReposType
+  | LoadReposSuccessType
+  | LoadReposErrorType
+type UpdateOrganizationNameType = SetOrganizationNameType
+type ActionType = LoadReposActionType | UpdateOrganizationNameType
+
 export const loadRepos = () => {
   return { type: LOAD_REPOS_LOADING }
 }
@@ -32,8 +57,7 @@ const initialState: StateType = {
   orgName: null,
 }
 
-// @ts-ignore
-const reduxSagaReducer = (state = initialState, action) => {
+const reduxSagaReducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
     case LOAD_REPOS_LOADING: {
       return {

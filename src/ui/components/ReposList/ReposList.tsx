@@ -1,10 +1,11 @@
 import React from 'react'
-import { RepoData } from '../../ts/api-types'
+import { RepoData } from '../../../ts/api-types'
 import { Table, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
-import { StateType } from '../../store/reducers'
-import { loadRepos } from '../../store/reducers'
+import { StateType } from '../../../store/reducers'
+import { loadRepos } from '../../../store/reducers'
+import './styles.css'
 
 const columns = [
   {
@@ -76,13 +77,10 @@ const ConnectedReposList: React.FC<ReposListProps> = ({
 }) => {
   return (
     <>
-      <Row>
-        <Col span={20} offset={2}>
-          <Table columns={columns} dataSource={repos} pagination={false} />
-        </Col>
-      </Row>
+      <Table columns={columns} dataSource={repos} pagination={false} />
+
       {repos.length > 0 && !hasLoadedAllRepos && (
-        <Row justify="center">
+        <Row justify="center" className="loadMoreButton">
           <Col span={6}>
             <Button
               type="primary"

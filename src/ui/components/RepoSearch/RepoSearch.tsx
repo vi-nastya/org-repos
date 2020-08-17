@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Input } from 'antd'
-import { loadRepos, setOrganizationName } from '../../store/reducers'
+import { loadRepos, setOrganizationName } from '../../../store/reducers'
+import './styles.css'
 
 const { Search } = Input
 
@@ -20,15 +21,17 @@ const RepoSearchConnected: React.FC<RepoSearchProps> = ({
   setOrganizationName,
 }) => {
   return (
-    <Search
-      placeholder="input search text"
-      enterButton="Search"
-      size="large"
-      onSearch={(value) => {
-        setOrganizationName(value)
-        loadRepos()
-      }}
-    />
+    <div className="searchWrapper">
+      <Search
+        placeholder="input search text"
+        enterButton="Search"
+        size="large"
+        onSearch={(value) => {
+          setOrganizationName(value)
+          loadRepos()
+        }}
+      />
+    </div>
   )
 }
 

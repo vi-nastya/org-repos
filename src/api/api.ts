@@ -22,7 +22,9 @@ export const fetchRepos = (organization: string, pageNumber = 0) => {
       }
     )
     .then((response) => {
-      console.log(response.data)
       return response.data
+    })
+    .catch((e) => {
+      throw new Error(e.response.statusText)
     })
 }

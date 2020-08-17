@@ -87,6 +87,7 @@ const reduxSagaReducer = (state = initialState, action: ActionType) => {
         data: [],
         error: '',
         orgName: action.payload,
+        loadedAll: false,
       }
     }
     default: {

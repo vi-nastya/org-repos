@@ -3,8 +3,8 @@ import { RepoData } from '../../../ts/api-types'
 import { Table, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
-import { StateType } from '../../../store/reducers'
-import { loadRepos } from '../../../store/reducers'
+import { ReposStateType } from '../../../ducks/repos-duck'
+import { loadRepos } from '../../../ducks/repos-duck'
 import './styles.css'
 
 const columns = [
@@ -12,7 +12,7 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (text: string, data: RepoData) => (
+    render: (name: string, data: RepoData) => (
       <a href={data.url} target="_blank">
         {data.name}
       </a>
@@ -22,7 +22,7 @@ const columns = [
     title: 'Watchers',
     dataIndex: 'watchers',
     key: 'watchers',
-    render: (count: number, data: RepoData) => (
+    render: (watchers: number, data: RepoData) => (
       <>
         <EyeOutlined /> {data.watchers}
       </>
@@ -32,7 +32,7 @@ const columns = [
     title: 'Stargazers',
     dataIndex: 'stargazers',
     key: 'stargazers',
-    render: (count: number, data: RepoData) => (
+    render: (stargazers: number, data: RepoData) => (
       <>
         <StarOutlined /> {data.stargazers}
       </>
@@ -42,7 +42,7 @@ const columns = [
     title: 'Forks',
     dataIndex: 'forks',
     key: 'forks',
-    render: (count: number, data: RepoData) => (
+    render: (forks: number, data: RepoData) => (
       <>
         <ForkOutlined /> {data.forks}
       </>
@@ -50,13 +50,11 @@ const columns = [
   },
 ]
 
-const mapStateToProps = (state: StateType) => {
-  return {
-    repos: state.data,
-    isLoadingData: state.loading,
-    hasLoadedAllRepos: state.loadedAll,
-  }
-}
+const mapStateToProps = (state: ReposStateType) => ({
+  repos: state.data,
+  isLoadingData: state.loading,
+  hasLoadedAllRepos: state.loadedAll,
+})
 
 const mapDispatchToProps = {
   loadRepos,
@@ -74,29 +72,27 @@ const ConnectedReposList: React.FC<ReposListProps> = ({
   isLoadingData,
   hasLoadedAllRepos,
   loadRepos,
-}) => {
-  return (
-    <>
-      <Table columns={columns} dataSource={repos} pagination={false} />
+}) => (
+  <>
+    <Table columns={columns} dataSource={repos} pagination={false} />
 
-      {repos.length > 0 && !hasLoadedAllRepos && (
-        <Row justify="center" className="loadMoreButton">
-          <Col span={6}>
-            <Button
-              type="primary"
-              loading={isLoadingData}
-              size="large"
-              block
-              onClick={() => loadRepos()}
-            >
-              Load more
-            </Button>
-          </Col>
-        </Row>
-      )}
-    </>
-  )
-}
+    {repos.length > 0 && !hasLoadedAllRepos && (
+      <Row justify="center" className="loadMoreButton">
+        <Col span={6}>
+          <Button
+            type="primary"
+            loading={isLoadingData}
+            size="large"
+            block
+            onClick={() => loadRepos()}
+          >
+            Load more
+          </Button>
+        </Col>
+      </Row>
+    )}
+  </>
+)
 
 const ReposList = connect(
   mapStateToProps,

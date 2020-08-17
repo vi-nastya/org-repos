@@ -1,11 +1,17 @@
 import { RepoData } from '../ts/api-types'
 
-export const LOAD_REPOS_LOADING = 'REDUX_SAGA_LOAD_REPOS_LOADING'
-export const LOAD_REPOS_SUCCESS = 'REDUX_SAGA_LOAD_REPOS_SUCCESS'
-export const LOAD_REPOS_ERROR = 'REDUX_SAGA_LOAD_REPOS_ERROR'
+export const LOAD_REPOS_LOADING = 'LOAD_REPOS_LOADING'
+export const LOAD_REPOS_SUCCESS = 'LOAD_REPOS_SUCCESS'
+export const LOAD_REPOS_ERROR = 'LOAD_REPOS_ERROR'
 
 export const SET_ORGANIZATION_NAME = 'SET_ORGANIZATION_NAME'
-export const CLEAR_ORGANIZATION_NAME = 'CLEAR_ORGANIZATION_NAME'
+
+type ActionType = LoadReposActionType | SetOrganizationNameType
+
+type LoadReposActionType =
+  | LoadReposType
+  | LoadReposSuccessType
+  | LoadReposErrorType
 
 type LoadReposType = {
   type: typeof LOAD_REPOS_LOADING
@@ -26,13 +32,6 @@ type SetOrganizationNameType = {
   payload: string
 }
 
-type LoadReposActionType =
-  | LoadReposType
-  | LoadReposSuccessType
-  | LoadReposErrorType
-type UpdateOrganizationNameType = SetOrganizationNameType
-type ActionType = LoadReposActionType | UpdateOrganizationNameType
-
 export const loadRepos = () => {
   return { type: LOAD_REPOS_LOADING }
 }
@@ -41,7 +40,7 @@ export const setOrganizationName = (orgName: string) => {
   return { type: SET_ORGANIZATION_NAME, payload: orgName }
 }
 
-export type StateType = {
+export type ReposStateType = {
   data: RepoData[]
   loading: boolean
   loadedAll: boolean
@@ -49,7 +48,7 @@ export type StateType = {
   orgName: string | null
 }
 
-const initialState: StateType = {
+const initialState: ReposStateType = {
   data: [],
   loading: false,
   loadedAll: false,
@@ -57,7 +56,7 @@ const initialState: StateType = {
   orgName: null,
 }
 
-const reduxSagaReducer = (state = initialState, action: ActionType) => {
+const reposReducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
     case LOAD_REPOS_LOADING: {
       return {
@@ -96,4 +95,4 @@ const reduxSagaReducer = (state = initialState, action: ActionType) => {
   }
 }
 
-export default reduxSagaReducer
+export default reposReducer

@@ -4,8 +4,8 @@ import { Input } from 'antd'
 import {
   loadRepos,
   setOrganizationName,
-  StateType,
-} from '../../../store/reducers'
+  ReposStateType,
+} from '../../../ducks/repos-duck'
 import { Typography } from 'antd'
 import './styles.css'
 
@@ -13,7 +13,7 @@ const { Text } = Typography
 
 const { Search } = Input
 
-const mapStateToProps = (state: StateType) => {
+const mapStateToProps = (state: ReposStateType) => {
   return {
     error: state.error,
   }

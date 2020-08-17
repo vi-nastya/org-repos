@@ -1,6 +1,6 @@
 import React from 'react'
 import { Layout } from 'antd'
-import { GithubOutlined } from '@ant-design/icons'
+import Icon, { GithubFilled } from '@ant-design/icons'
 
 export const PageLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -9,11 +9,15 @@ export const PageLayout: React.FC<{ children: React.ReactNode }> = ({
   return (
     <Layout>
       <Header>
-        <GithubOutlined />
+        <Icon
+          type="github"
+          component={() => <GithubFilled />}
+          style={{ color: 'white' }}
+        />
         Header
       </Header>
       <Content>{children}</Content>
-      <Footer>Footer</Footer>
+      <Footer>© Anastasia Videneeva</Footer>
     </Layout>
   )
 }

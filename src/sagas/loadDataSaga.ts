@@ -3,16 +3,17 @@ import {
   LOAD_REPOS_ERROR,
   LOAD_REPOS_LOADING,
   LOAD_REPOS_SUCCESS,
-  StateType,
-} from '../store/reducers'
+  ReposStateType,
+} from '../ducks/repos-duck'
 import { fetchRepos } from '../api/api'
 import { select } from 'redux-saga/effects'
 import { REPOS_PER_PAGE } from '../constants'
-import { formatApiData } from '../helpers/formatApiData'
+import { normalizeApiData } from '../helpers/normalizeApiData'
 
-const getNewPageNumber = (state: StateType) =>
+const getNewPageNumber = (state: ReposStateType) =>
   Math.ceil(state.data.length / REPOS_PER_PAGE)
-const getOrgName = (state: StateType) => state.orgName
+
+const getOrgName = (state: ReposStateType) => state.orgName
 
 // worker saga
 function* fetchReposData() {
@@ -21,14 +22,14 @@ function* fetchReposData() {
     const orgName = yield select(getOrgName)
 
     const repos = yield fetchRepos(orgName, pageNumber)
-    yield put({ type: LOAD_REPOS_SUCCESS, data: repos.map(formatApiData) })
+    yield put({ type: LOAD_REPOS_SUCCESS, data: repos.map(normalizeApiData) })
   } catch (e) {
     yield put({ type: LOAD_REPOS_ERROR, error: e.message })
   }
 }
 
-export function* loadDataSaga() {
+export function* loadReposSaga() {
   yield takeEvery(LOAD_REPOS_LOADING, fetchReposData)
 }
 
-export default loadDataSaga
+export default loadReposSaga

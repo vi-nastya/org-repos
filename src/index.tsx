@@ -7,8 +7,8 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import rootReducer from './store/reducers'
-import loadDataSaga from './sagas/loadDataSaga'
+import rootReducer from './ducks/repos-duck'
+import loadReposSaga from './sagas/loadDataSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -21,12 +21,12 @@ const store = createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 )
 
-sagaMiddleware.run(loadDataSaga)
+sagaMiddleware.run(loadReposSaga)
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App store={store} />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

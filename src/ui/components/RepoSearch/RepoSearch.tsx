@@ -16,6 +16,7 @@ const { Search } = Input
 const mapStateToProps = (state: ReposStateType) => {
   return {
     error: state.error,
+    noRepos: state.loadedAll && state.data.length === 0,
   }
 }
 
@@ -26,12 +27,14 @@ const mapDispatchToProps = {
 
 type RepoSearchProps = {
   error: string
+  noRepos: boolean
   loadRepos: () => void
   setOrganizationName: (orgName: string) => void
 }
 
 const RepoSearchConnected: React.FC<RepoSearchProps> = ({
   error,
+  noRepos,
   loadRepos,
   setOrganizationName,
 }) => {
@@ -50,6 +53,9 @@ const RepoSearchConnected: React.FC<RepoSearchProps> = ({
         <Text type="danger">
           Error occured while fetching repositories: {error}
         </Text>
+      )}
+      {noRepos && (
+        <Text type="warning">No repositories found for this organization</Text>
       )}
     </div>
   )

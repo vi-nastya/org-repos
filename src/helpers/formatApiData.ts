@@ -1,6 +1,6 @@
-import { RepoData } from '../ts/api-types'
+import { RepoData, RepoDataApi } from '../ts/api-types'
 
-export const formatApiData = (dataFromApi: any): RepoData => {
+export const formatApiData = (dataFromApi: RepoDataApi): RepoData => {
   return {
     created: dataFromApi.created_at,
     description: dataFromApi.description,

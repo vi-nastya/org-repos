@@ -8,6 +8,7 @@ import {
 import { fetchRepos } from '../api/api'
 import { select } from 'redux-saga/effects'
 import { REPOS_PER_PAGE } from '../constants'
+import { formatApiData } from '../helpers/formatApiData'
 
 const getNewPageNumber = (state: StateType) =>
   Math.ceil(state.data.length / REPOS_PER_PAGE)
@@ -21,7 +22,7 @@ function* fetchReposData(action) {
     const orgName = yield select(getOrgName)
 
     const repos = yield fetchRepos(orgName, pageNumber)
-    yield put({ type: LOAD_REPOS_SUCCESS, data: repos })
+    yield put({ type: LOAD_REPOS_SUCCESS, data: repos.map(formatApiData) })
   } catch (e) {
     yield put({ type: LOAD_REPOS_ERROR, error: e.message })
   }

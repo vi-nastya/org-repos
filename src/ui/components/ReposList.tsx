@@ -68,6 +68,7 @@ const ConnectedReposList: React.FC<{
   hasLoadedAllRepos: boolean
   loadRepos: () => void
 }> = ({ repos, isLoadingData, hasLoadedAllRepos, loadRepos }) => {
+  console.log('repos', repos)
   return (
     <>
       <Row>

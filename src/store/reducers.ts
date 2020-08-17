@@ -57,6 +57,8 @@ const reduxSagaReducer = (state = initialState, action) => {
     case SET_ORGANIZATION_NAME: {
       return {
         ...state,
+        data: [],
+        error: '',
         orgName: action.payload,
       }
     }

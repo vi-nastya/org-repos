@@ -1,23 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Input } from 'antd'
-import { loadRepos } from '../../store/reducers'
+import { loadRepos, setOrganizationName } from '../../store/reducers'
 
 const { Search } = Input
 
 // @ts-ignore
 const mapDispatchToProps = {
-  getRepos: (orgName: string) => loadRepos(orgName),
+  loadRepos,
+  setOrganizationName,
 }
 
 // @ts-ignore
-const RepoSearchConnected = ({ getRepos }) => {
+const RepoSearchConnected = ({ loadRepos, setOrganizationName }) => {
   return (
     <Search
       placeholder="input search text"
       enterButton="Search"
       size="large"
-      onSearch={(value) => getRepos(value)}
+      onSearch={(value) => {
+        setOrganizationName(value)
+        loadRepos()
+      }}
     />
   )
 }

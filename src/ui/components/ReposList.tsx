@@ -4,6 +4,7 @@ import { Table, Space, Row, Col, Button } from 'antd'
 import { StarOutlined, ForkOutlined, EyeOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
 import { StateType } from '../../store/reducers'
+import { loadRepos } from '../../store/reducers'
 
 const columns = [
   {
@@ -52,25 +53,16 @@ const mapStateToProps = (state: StateType) => {
   return { repos: state.data, isLoadingData: state.loading }
 }
 
+// @ts-ignore
+const mapDispatchToProps = {
+  loadRepos,
+}
+
 const ConnectedReposList: React.FC<{
   repos: RepoData[]
   isLoadingData: boolean
-}> = ({ repos }) => {
-  const [loadings, setLoadings] = useState<boolean[]>([])
-
-  const enterLoading = (index: number) => {
-    const newLoadings = [...loadings]
-    newLoadings[index] = true
-
-    setLoadings(newLoadings)
-
-    setTimeout(() => {
-      const newLoadings = [...loadings]
-      newLoadings[index] = false
-
-      setLoadings(newLoadings)
-    }, 2000)
-  }
+  loadRepos: () => void
+}> = ({ repos, isLoadingData, loadRepos }) => {
   return (
     <>
       <Row>
@@ -78,23 +70,28 @@ const ConnectedReposList: React.FC<{
           <Table columns={columns} dataSource={repos} pagination={false} />
         </Col>
       </Row>
-      <Row justify="center">
-        <Col span={6}>
-          <Button
-            type="primary"
-            loading={loadings[0]}
-            size="large"
-            block
-            onClick={() => enterLoading(0)}
-          >
-            Load more
-          </Button>
-        </Col>
-      </Row>
+      {repos.length > 0 && (
+        <Row justify="center">
+          <Col span={6}>
+            <Button
+              type="primary"
+              loading={isLoadingData}
+              size="large"
+              block
+              onClick={() => loadRepos()}
+            >
+              Load more
+            </Button>
+          </Col>
+        </Row>
+      )}
     </>
   )
 }
 
-const ReposList = connect(mapStateToProps)(ConnectedReposList)
+const ReposList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ConnectedReposList)
 
 export default ReposList

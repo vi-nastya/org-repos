@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { REPOS_PER_PAGE } from '../constants'
 
 const API_URL = 'https://api.github.com'
 
@@ -10,13 +11,16 @@ per_page: max 100
 page
 type: all, public, private, forks, sources, member, internal (default ALL)
 */
-export const fetchRepos = (organization: string) => {
+export const fetchRepos = (organization: string, pageNumber = 0) => {
   return axios
-    .get(`${API_URL}/orgs/${organization}/repos?per_page=10&page=0`, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-      },
-    })
+    .get(
+      `${API_URL}/orgs/${organization}/repos?per_page=${REPOS_PER_PAGE}&page=${pageNumber}`,
+      {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+        },
+      }
+    )
     .then((response) => {
       console.log(response.data)
       return response.data

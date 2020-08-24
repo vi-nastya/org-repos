@@ -1,16 +1,16 @@
-# Поиск репозиториев организации
+# Organization repositories search
 
-[Задеплоенная версия](https://vinastya-org-repos.netlify.app/)
-Поиск репозиториев компании по названию и просмотр статистики: количество звезд, форков, watchers.
+[Deployed version (netlify)](https://vinastya-org-repos.netlify.app/)
+Searches github repositories by organization and displays statistics: forks, watchers, stargazers.
 
-В проекте используется [github API](https://docs.github.com/en/rest/reference/repos#list-organization-repositories).
+Pet project that I built to learn basics of redux-saga and ant design.
 
-## Технологии
+Uses [github API](https://docs.github.com/en/rest/reference/repos#list-organization-repositories).
+
+## Technologies
 
 React ([Create React App](https://github.com/facebook/create-react-app)), Typescript, Redux, redux-saga, axios, Ant design.
 
-С redux-saga и ant design работала впервые.
+## How to run
 
-## Как запустить
-
-Для локального запуска необходимо скачать репозиторий и выполнить `yarn install` и `yarn start`.
+To start the project locally you should clone the repository and run `yarn install` and `yarn start` commands.
